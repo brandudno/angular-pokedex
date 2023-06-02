@@ -1,0 +1,55 @@
+.flex-container {
+  display: flex;
+  flex-flow: row wrap;
+  max-width: 1000px;
+  background-color: $white;
+  margin: 0 auto;
+  align-items: flex-start;
+
+  .item {
+    align-self: center;
+  }
+
+  &_quarters {
+    flex-flow: row wrap;
+
+    @include respond-to(tablet) {
+      flex-flow: row wrap;
+    }
+
+    .item {
+      width: 50%;
+
+      @include respond-to(tablet) {
+        width: 25%;
+      }
+
+    }
+  }
+
+  &_thirds {
+    flex-flow: row wrap;
+
+    @include respond-to(tablet) {
+      flex-flow: row wrap;
+    }
+
+    .item {
+      width: 33.33%;
+
+      @include respond-to(phone) {
+        width: 100%;
+      }
+
+    }
+  }
+
+  &_full {
+    flex-flow: row wrap;
+
+    .item {
+      width: 100%;
+    }
+  }
+
+}

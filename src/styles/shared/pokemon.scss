@@ -1,0 +1,30 @@
+.single-pokemon {
+  padding: $default-padding;
+
+  p {
+    margin: 0 auto;
+    text-align: center;
+    text-transform: capitalize;
+  }
+
+  img {
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+    height: auto;
+  }
+
+}
+
+.pokemon-footer {
+  padding: $default-padding;
+}
+
+.pokemon-detail {
+  padding: $default-padding;
+
+  h2 {
+    text-transform: capitalize;
+  }
+
+}
