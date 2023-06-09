@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, switchMap } from 'rxjs';
 import { Pokemon } from 'src/app/models/Pokemon';
 import { PokemonService } from 'src/app/services/pokemon.service';
@@ -18,23 +18,16 @@ export class IndexComponent {
 
   constructor(
     private readonly _pokemonService: PokemonService,
-    private readonly _route: ActivatedRoute,
     private readonly _router: Router
   ) {}
 
-  private updatePageParams(): void {
-    this._router.navigate([''], { queryParams: { page: this.currentPage$.value } });
-  }
-
   public nextPage(): void {
     this.currentPage$.next(this.currentPage$.value + 1);
-    this.updatePageParams();
   }
 
   public previousPage(): void {
     if (this.currentPage$.value <= 0) return;
 
     this.currentPage$.next(this.currentPage$.value - 1);
-    this.updatePageParams();
   }
 }
