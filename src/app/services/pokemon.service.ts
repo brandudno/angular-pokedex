@@ -12,22 +12,22 @@ export class PokemonService {
 
   constructor(private readonly http: HttpClient) {}
 
-  private getBasicPokemonList(pageNumber: number): Observable<Pick<Pokemon, 'name' | 'url'>[]> {
+  private getBasicPokemonList(pageNumber: number = 1): Observable<Pick<Pokemon, 'name' | 'url'>[]> {
     const limit: number = 24;
     const offset: number = pageNumber * limit;
 
-    return this.http.get<Partial<Pokemon>>(`${this.baseUrl}pokemon?limit=${limit}&offset=${offset}`).pipe(map((res: any) => res.results));
+    return this.http.get<Pick<Pokemon, 'name' | 'url'>[]>(`${this.baseUrl}pokemon?limit=${limit}&offset=${offset}`).pipe(map((res: any) => res.results));
   }
 
-  public getPokemon(pageNumber: number): Observable<Pokemon[]> {
+  public getPokemon(pageNumber: number = 1): Observable<Pokemon[]> {
     return this.getBasicPokemonList(pageNumber).pipe(
       switchMap((pokemonList: Pick<Pokemon, 'name'| 'url'>[]) => {
-        return combineLatest(pokemonList.map((pokemon) => this.http.get(`${pokemon.url}`) as Observable<Pokemon>));
+        return combineLatest(pokemonList.map((pokemon) => this.http.get<Pokemon>(`${pokemon.url}`)));
       })
     );
   }
 
   public getSinglePokemonDetails(id: number): Observable<Pokemon> {
-    return this.http.get(`${this.baseUrl}pokemon/${id}`) as Observable<Pokemon>;
+    return this.http.get<Pokemon>(`${this.baseUrl}pokemon/${id}`);
   }
 }

@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, switchMap } from 'rxjs';
 import { Pokemon } from 'src/app/models/Pokemon';
 import { PokemonService } from 'src/app/services/pokemon.service';
@@ -17,8 +16,7 @@ export class IndexComponent {
   )
 
   constructor(
-    private readonly _pokemonService: PokemonService,
-    private readonly _router: Router
+    private readonly _pokemonService: PokemonService
   ) {}
 
   public nextPage(): void {
