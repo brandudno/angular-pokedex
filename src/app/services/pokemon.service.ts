@@ -12,7 +12,7 @@ export class PokemonService {
 
   constructor(private readonly http: HttpClient) {}
 
-  private getBasicPokemon(pageNumber: number): Observable<Pick<Pokemon, 'name' | 'url'>[]> {
+  private getBasicPokemonList(pageNumber: number): Observable<Pick<Pokemon, 'name' | 'url'>[]> {
     const limit: number = 24;
     const offset: number = pageNumber * limit;
 
@@ -20,10 +20,14 @@ export class PokemonService {
   }
 
   public getPokemon(pageNumber: number): Observable<Pokemon[]> {
-    return this.getBasicPokemon(pageNumber).pipe(
+    return this.getBasicPokemonList(pageNumber).pipe(
       switchMap((pokemonList: Pick<Pokemon, 'name'| 'url'>[]) => {
         return combineLatest(pokemonList.map((pokemon) => this.http.get(`${pokemon.url}`) as Observable<Pokemon>));
       })
     );
+  }
+
+  public getSinglePokemonDetails(id: number): Observable<Pokemon> {
+    return this.http.get(`${this.baseUrl}pokemon/${id}`) as Observable<Pokemon>;
   }
 }
