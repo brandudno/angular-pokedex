@@ -10,12 +10,12 @@
 
 <div class="flex-container flex-container_thirds pokemon-footer">
   <div class="item">
-    <button class="fleft" *ngIf="(currentPage$ | async) !== 0" (click)="previousPage()">Previous</button>
+    <button class="fleft previous-button" *ngIf="(currentPage$ | async) !== 0" (click)="previousPage()">Previous</button>
   </div>
   <div class="item">
     <p class="current-page">Current Page: {{currentPage$ | async }}</p>
   </div>
   <div class="item">
-    <button class="fright" (click)="nextPage()">Next</button>
+    <button class="fright next-button" (click)="nextPage()">Next</button>
   </div>
 </div>
