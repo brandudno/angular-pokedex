@@ -2,7 +2,7 @@
   *ngIf="pokemon$ | async as pokemon" 
   class='flex-container flex-container_full'>
   <div class="item pokemon-detail">
-    <h2>{{pokemon.name}}</h2>
+    <h2 class="pokemon-name">{{pokemon.name}}</h2>
 
     <img src={{pokemon.sprites.front_default!}} alt={{pokemon.name}} />
   </div>
