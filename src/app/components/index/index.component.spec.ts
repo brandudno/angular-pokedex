@@ -4,11 +4,11 @@ import { IndexComponent } from './index.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { PokemonService } from 'src/app/services/pokemon.service';
+import { PokemonServiceStub } from 'src/app/services/pokemon.service.stub';
 
 describe('IndexComponent', () => {
   let component: IndexComponent;
   let fixture: ComponentFixture<IndexComponent>;
-  const pokemonServiceSpy: jasmine.SpyObj<PokemonService> = jasmine.createSpyObj('PokemonService', ['getPokemon'])
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -19,17 +19,25 @@ describe('IndexComponent', () => {
       ],
       providers: [{
         provide: PokemonService, 
-        useValue: pokemonServiceSpy
-      }]
+        useClass: PokemonServiceStub
+      }],
     });
     fixture = TestBed.createComponent(IndexComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-
-    pokemonServiceSpy.getPokemon.calls.reset();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should have a current page of 0 by default', (done: DoneFn) => {
+    component.currentPage$.subscribe({
+      next: (pageNumber: number) => {
+        expect(pageNumber).toBe(0);
+        done();
+      }, 
+      error: () => done.fail
+    })
   });
 });

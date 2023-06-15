@@ -3,7 +3,7 @@ import { TestBed } from '@angular/core/testing';
 import { PokemonService } from './pokemon.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { HttpClient } from '@angular/common/http';
-import { basicPokemonStub, pokemonStub } from './pokemon.service.stub';
+import { basicPokemonStub, pokemonStub } from './pokemon.service.mock';
 import { of } from 'rxjs';
 import { Pokemon } from '../models/Pokemon';
 
